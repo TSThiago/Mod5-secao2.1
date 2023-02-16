@@ -1,22 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
+import { addMoneyAction, removeMoneyAction } from './store/wallet/action'
+import store from './store'
+import { useSelector } from 'react-redux'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const walletValue  = useSelector((state : iState) => state.wallet.total)
 
   const addMoney = () => {
-    setCount(count + 10)
+    store.dispatch(addMoneyAction(10))
   }
 
   const removeMoney = () => {
-    setCount(count - 10)
+    store.dispatch(removeMoneyAction(10))
   }
 
   return (
     <div className="App">
       <div>
-        <span>R${count.toFixed(2)}</span>
+        <span>R${walletValue.toFixed(2)}</span>
       </div>
       <div>
         <button onClick={addMoney}>Depositar R$10.00</button>
