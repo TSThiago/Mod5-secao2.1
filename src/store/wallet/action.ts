@@ -11,3 +11,10 @@ export const removeMoneyAction = (total: number) => {
         payload: total
     }
 }
+
+export const getInputValueAction = (value : number) => {
+    return {
+        type: "GET_INPUT_VALUE",
+        payload: value
+    }
+}

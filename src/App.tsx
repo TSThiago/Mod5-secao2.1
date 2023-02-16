@@ -1,28 +1,42 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import './App.css'
-import { addMoneyAction, removeMoneyAction } from './store/wallet/action'
+import { addMoneyAction, getInputValueAction, removeMoneyAction } from './store/wallet/action'
 import store from './store'
 import { useSelector } from 'react-redux'
 
 function App() {
-  const walletValue  = useSelector((state : iState) => state.wallet.total)
 
-  const addMoney = () => {
-    store.dispatch(addMoneyAction(10))
+    useEffect(() => {
+      handleChange
+    }, [])
+  
+  const walletValue = useSelector((state: iState) => state.wallet)
+
+  const addMoney = (value: number) => {
+    store.dispatch(addMoneyAction(value))
   }
 
-  const removeMoney = () => {
-    store.dispatch(removeMoneyAction(10))
+  const removeMoney = (value: number) => {
+    store.dispatch(removeMoneyAction(value))
+  }
+
+  const handleChange = (event : React.FormEvent<HTMLInputElement>) => {
+    store.dispatch(getInputValueAction(parseFloat(event.currentTarget.value)))
+    console.log(event.currentTarget.value)
+
   }
 
   return (
     <div className="App">
       <div>
-        <span>R${walletValue.toFixed(2)}</span>
+        <span>R${walletValue.total.toFixed(2)}</span>
       </div>
       <div>
-        <button onClick={addMoney}>Depositar R$10.00</button>
-        <button onClick={removeMoney}>Sacar R$10.00</button>
+        <input type="number" onChange={(event) => handleChange(event)} />
+      </div>
+      <div>
+        <button onClick={() => addMoney(walletValue.value)}>Depositar</button>
+        <button onClick={() => removeMoney(walletValue.value)}>Sacar</button>
       </div>
     </div>
   )

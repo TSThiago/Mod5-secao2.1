@@ -5,6 +5,7 @@ interface iAction {
 
 interface iState {
     wallet: {
-        total: 0
+        total: 0;
+        value: 0;
     }
 }
