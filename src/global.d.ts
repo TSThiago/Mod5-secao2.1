@@ -7,5 +7,8 @@ interface iState {
     wallet: {
         total: 0;
         value: 0;
+    };
+    theme: {
+        currentTheme : "DARK"
     }
 }

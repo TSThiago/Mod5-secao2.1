@@ -1,6 +1,6 @@
 const WALLET_INITIAL_STATE = {
     total: 0,
-    value: 0
+    value: 0,
 }
 
 const walletReducer = (state = WALLET_INITIAL_STATE, action: iAction) => {
